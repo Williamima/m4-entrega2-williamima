@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { booksDatabase } from "../database/database";
+import { AppError } from "../errors/Apperror";
 
 export class BooksMiddlewares {
   checkBookId(
@@ -12,7 +13,9 @@ export class BooksMiddlewares {
     );
 
     if (index === -1) {
-      return res.status(404).json({ error: "Book not found."});
+      throw new AppError(404, "Book not found.")
+      
+      // return res.status(404).json({ error: "Book not found."});
     }
 
     res.locals.booksIndex = index;
@@ -28,7 +31,9 @@ export class BooksMiddlewares {
     const bookName = booksDatabase.find((book) => book.name === req.body.name)
 
     if(bookName) {
-        return res.status(409).json({ error: "Book already registered."})
+      throw new AppError(409, "Book already registered.")
+
+        // return res.status(409).json({ error: "Book already registered."})
     }
 
     return next()
