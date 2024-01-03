@@ -15,7 +15,6 @@ export class BooksMiddlewares {
     if (index === -1) {
       throw new AppError(404, "Book not found.")
       
-      // return res.status(404).json({ error: "Book not found."});
     }
 
     res.locals.booksIndex = index;
@@ -33,7 +32,6 @@ export class BooksMiddlewares {
     if(bookName) {
       throw new AppError(409, "Book already registered.")
 
-        // return res.status(409).json({ error: "Book already registered."})
     }
 
     return next()
