@@ -1,14 +1,21 @@
-export interface IDatabase {
-  id: number;
-  name: string;
-  pages: number;
-  category?: string | undefined;
-  createdAt: Date;
-  updatedAt: Date;
+import { AnyZodObject, z } from "zod";
+import {
+  createProductBookSchema,
+  productArraySchema,
+  productCreateSchema,
+  productUpdateSchema,
+} from "../schemas/createProductBody.schema";
+
+export type IDatabase = z.infer<typeof createProductBookSchema>;
+
+export type CreateBook = z.infer<typeof productCreateSchema>;
+
+export type UpdateBook = z.infer<typeof productUpdateSchema>;
+
+export type bookArray = z.infer<typeof productArraySchema>;
+
+export interface RequestSchema {
+  params?: AnyZodObject,
+  body?: AnyZodObject,
+  query?: AnyZodObject,
 }
-
-export type CreateBook = Pick<IDatabase, "name" | "pages" | "category">;
-
-export type UpdateBook = Partial<CreateBook>;
-
-

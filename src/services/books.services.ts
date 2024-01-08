@@ -15,6 +15,9 @@ export class BookService {
     return newProduct
   };
 
+  getProduct = (query: string) => {
+    return booksDatabase.filter((book) => book.category === query)
+  }
 
   patchProducts = (index: number, data: UpdateBook): IDatabase => {
 

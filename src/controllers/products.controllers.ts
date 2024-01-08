@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
-import { booksDatabase, generateId } from "../database/database";
+import { booksDatabase } from "../database/database";
 import { BookService } from "../services/books.services";
 
 export class ProductsController {
+  private bookService = new BookService();
+  
   createProduct = (req: Request, res: Response): Response => {
     const bookService = new BookService();
     const newBook = bookService.createProduct(req.body);
@@ -11,6 +13,10 @@ export class ProductsController {
   };
 
   getProducts = (req: Request, res: Response): Response => {
+    const categorys = req.query.category as string
+
+    const allBooks = this.bookService.getProduct(categorys)
+    
     return res.status(200).json(booksDatabase);
   };
 
