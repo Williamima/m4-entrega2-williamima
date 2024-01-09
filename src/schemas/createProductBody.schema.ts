@@ -19,7 +19,7 @@ export const productUpdateSchema = productCreateSchema.partial()
 
 export const productArraySchema = createProductBookSchema.array()
 
-export const pruductQuerySchema = z.object({
-    name: z.string()
+export const productQuerySchema = z.object({
+    name: z.string().optional()
 })
 

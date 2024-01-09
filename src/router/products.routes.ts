@@ -2,7 +2,7 @@ import { Router } from "express";
 import { ProductsController } from "../controllers/products.controllers";
 import { BooksMiddlewares } from "../middlewares/books.middelware";
 import { GlobalErrors } from "../errors/errors.middlewares";
-import { productCreateSchema, productUpdateSchema, pruductQuerySchema } from "../schemas/createProductBody.schema";
+import { productCreateSchema, productUpdateSchema, productQuerySchema } from "../schemas/createProductBody.schema";
 
 export const productsRouter = Router();
 const globalErrors = new GlobalErrors();
@@ -11,7 +11,7 @@ const booksMiddlewares = new BooksMiddlewares();
 
 const productsControllers = new ProductsController()
 
-productsRouter.get("/", /*globalErrors.validadeBody({query: pruductQuerySchema}),*/ productsControllers.getProducts)
+productsRouter.get("/", globalErrors.validadeBody({query: productQuerySchema}), productsControllers.getProducts)
 
 productsRouter.use("/", booksMiddlewares.checkBookName)
 productsRouter.post("/", globalErrors.validadeBody({body: productCreateSchema}), productsControllers.createProduct)

@@ -13,11 +13,11 @@ export class ProductsController {
   };
 
   getProducts = (req: Request, res: Response): Response => {
-    const categorys = req.query.category as string
+    const name = req.query.search as string
 
-    const allBooks = this.bookService.getProduct(categorys)
+    const allBooks = this.bookService.getProduct(name)
     
-    return res.status(200).json(booksDatabase);
+    return res.status(200).json(allBooks);
   };
 
   getOneProduct = (req: Request, res: Response): Response => {

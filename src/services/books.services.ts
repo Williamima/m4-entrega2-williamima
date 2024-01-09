@@ -12,15 +12,18 @@ export class BookService {
 
     booksDatabase.push(newProduct);
 
-    return newProduct
+    return newProduct;
   };
 
-  getProduct = (query: string) => {
-    return booksDatabase.filter((book) => book.category === query)
-  }
+  getProduct = (query?: string): IDatabase[] | IDatabase => {
+    if(query) {
+      return booksDatabase.filter((book) => book.name.toLocaleLowerCase().includes(query.toLocaleLowerCase()));
+
+    }
+    return booksDatabase;
+  };
 
   patchProducts = (index: number, data: UpdateBook): IDatabase => {
-
     booksDatabase[index] = {
       ...booksDatabase[index],
       ...data,
